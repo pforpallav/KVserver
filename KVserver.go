@@ -5,6 +5,7 @@ import (
         "net";
         "os";
         "io";
+        //"string";
 )
 
 func main() {
@@ -15,7 +16,10 @@ func main() {
                 data = make([]byte, 1024);
         )
 
-        fmt.Println("Starting Key server...");
+        var m map[string]string;
+        m = make(map[string]string);
+
+        fmt.Println("Starting Key Value Server ...");
 
         lis, error := net.Listen("tcp", remote);
 
@@ -29,13 +33,15 @@ func main() {
         for {
                 var response string;
                 var arg1 string;
+                var arg2 string;
+                var val string;
                 var read = true;
                 //var count = 1;
 
                 //Accepting connection
                 con, error := lis.Accept();
                 if error != nil {
-                        fmt.Printf("Error: Accepting data: %s\n", error);
+                        fmt.Printf("Error accepting connection: %s\n", error);
                         os.Exit(2);
                 }
                 
@@ -52,16 +58,45 @@ func main() {
                                         response = string(data[0:n]);
                                         if(response == string("GET")){
                                                 n, error = con.Read(data);
+
+                                                if(error != nil){
+                                                       //error handling 
+                                                }
                                                 arg1 = string(data[0:n]);
-                                                fmt.Printf("%s", arg1);
+
+                                                val = m[arg1];
+                                                if(val == ""){
+                                                        val = string("UNDEFINED");
+                                                }
+                                                con.Write([]byte(val));
                                         } else if(response == string("PUT")){
-                                                
+                                                n, error = con.Read(data);
+                                                if(error != nil){
+                                                        //error handling
+                                                }
+                                                arg1 = string(data[0:n]);
+
+                                                n, error = con.Read(data);
+                                                if(error != nil){
+                                                        //error handling
+                                                }
+                                                arg2 = string(data[0:n]);
+
+                                                m[arg1] = arg2;
                                         } else if(response == string("DEL")){
-                                                
+                                                n, error = con.Read(data);
+
+                                                if(error != nil){
+                                                       //error handling 
+                                                }
+                                                arg1 = string(data[0:n]);
+
+                                                delete(m, arg1);
+                                        } else {
+                                                fmt.Printf("Error accepting command: %s\n", response);
                                         }
                                         //count+
                                 default:
-                                        fmt.Printf("Error: Reading data : %s \n", error);
                                         read = false;
                         }
                 }

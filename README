@@ -1,0 +1,11 @@
+Assignment 1
+-------------------------
+Kumar Pallav - 100050046
+-------------------------
+
+Current State:
+A simple socket connection is established between the server and the client. There is no threading, so there is only one client to server connection possible. I still on deciding how to implement the key-database.
+
+src:
+KVserver.go - The server that accepts connection from a client. Only recognises "GET", "PUT", "DEL" for now.
+KVclient.go - The client that just transfers the standard input to the server.

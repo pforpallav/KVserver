@@ -60,7 +60,7 @@ func main() {
                                                 n, error = con.Read(data);
 
                                                 if(error != nil){
-                                                       //error handling 
+                                                       if error != nil { fmt.Printf("Error recieving data from server: %s\n", error);}
                                                 }
                                                 arg1 = string(data[0:n]);
 
@@ -72,13 +72,13 @@ func main() {
                                         } else if(response == string("PUT")){
                                                 n, error = con.Read(data);
                                                 if(error != nil){
-                                                        //error handling
+                                                        if error != nil { fmt.Printf("Error recieving data from server: %s\n", error);}
                                                 }
                                                 arg1 = string(data[0:n]);
 
                                                 n, error = con.Read(data);
                                                 if(error != nil){
-                                                        //error handling
+                                                        if error != nil { fmt.Printf("Error recieving data from server: %s\n", error);}
                                                 }
                                                 arg2 = string(data[0:n]);
 
@@ -87,7 +87,7 @@ func main() {
                                                 n, error = con.Read(data);
 
                                                 if(error != nil){
-                                                       //error handling 
+                                                       if error != nil { fmt.Printf("Error recieving data from server: %s\n", error);}
                                                 }
                                                 arg1 = string(data[0:n]);
 

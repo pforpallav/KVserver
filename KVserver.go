@@ -45,7 +45,7 @@ func main() {
                         os.Exit(2);
                 }
                 
-                fmt.Printf("New Connection received from: %s \n", con.RemoteAddr());
+                fmt.Printf("New connection received from: %s \n", con.RemoteAddr());
 
                 for read {
                         n, error := con.Read(data);

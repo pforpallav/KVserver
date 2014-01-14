@@ -4,8 +4,11 @@ Kumar Pallav - 100050046
 -------------------------
 
 Current State:
-A simple socket connection is established between the server and the client. There is no threading, so there is only one client to server connection possible. I still on deciding how to implement the key-database.
+A simple socket connection is established between the server and the client. There is no threading, so there is only one client to server connection possible. Currently, only a live mapping of key-values is maintained. As long the server is running, the pairing is alive.
+
+Work to be Done:
+Get a threaded server, that could serve multiple clients at a time (if possible). Make things more robust. Make the pairing permanent.
 
 src:
-KVserver.go - The server that accepts connection from a client. Only recognises "GET", "PUT", "DEL" for now.
-KVclient.go - The client that just transfers the standard input to the server.
+KVserver.go - The server executable that accepts connection from a client. Only recognises "GET", "PUT", "DEL" for now.
+KVclient.go - The client executable that validates and transfers commands to the server.
